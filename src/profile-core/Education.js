@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /**
  * Represents an Education object.
  */

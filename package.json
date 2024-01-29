@@ -8,18 +8,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/onlythompson/ufa-nwed-profile-management-core.git"
+    "url": "git+https://github.com/Thompson-Dominic/ufa-nwed-profile-management-core.git"
   },
   "keywords": [
-    "\"Profile",
-    "Management\""
+    "Profile Management Core",
+    "Profile Management Domain"
   ],
   "author": "Dominic Thompson",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/onlythompson/ufa-nwed-profile-management-core/issues"
+    "url": "https://github.com/Thompson-Dominic/ufa-nwed-profile-management-core/issues"
   },
-  "homepage": "https://github.com/onlythompson/ufa-nwed-profile-management-core#readme",
+  "homepage": "https://github.com/Thompson-Dominic/ufa-nwed-profile-management-core#readme",
   "devDependencies": {
     "eslint": "^8.56.0",
     "eslint-config-airbnb": "^19.0.4",

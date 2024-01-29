@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* Profile Settings for the Profile Management System. */
 import { BaseDomain } from '../seedwork';
 

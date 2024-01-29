@@ -1,11 +1,16 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable no-undef */
 // Tests for the Profile class
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { NIL as NIL_UUID } from 'uuid';
+import ProfileManagementException from '../src/ProfileManagementException';
 
 import {
-  Profile, WorkExperience, ProfileSetting, Education,
+  Profile,
+  WorkExperience,
+  ProfileSetting,
+  Education,
 } from '../src/profile-core';
 
 /**
@@ -63,4 +68,31 @@ describe('Profile', () => {
   });
 
   // Add more tests as needed for other methods and edge cases
+  it('should throw an error if an education does not belong to the profile', () => {
+    const education = new Education(
+      'AnotherProfileId',
+      'Harvard',
+      'Computer Science',
+      'Bachelor',
+      2022,
+    );
+
+    expect(() => {
+      profile.addEducation(education);
+    }).toThrow(ProfileManagementException);
+  });
+
+  it('should not throw an error if an education belongs to the profile', () => {
+    const education = new Education(
+      profile.id,
+      'Harvard',
+      'Computer Science',
+      'Bachelor',
+      2022,
+    );
+
+    expect(() => {
+      profile.addEducation(education);
+    }).not.toThrow();
+  });
 });
