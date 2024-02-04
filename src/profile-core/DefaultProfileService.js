@@ -1,13 +1,23 @@
 /* eslint-disable linebreak-style */
 
+import ProfileManagementException from '../ProfileManagementException';
 import ProfileDTOFactory from './ProfileDTOFactory';
+import ProfileRepository from './ProfileRepository';
+import Profile from './Profile';
 
 class DefaultProfileService {
+  #profileRepository;
+
   /**
    * @param {ProfileRepository} profileRepository - The repository to use for profile data.
+   * simulate the constructor injection
    */
   constructor(profileRepository) {
-    this.profileRepository = profileRepository;
+    if (!profileRepository) throw new ProfileManagementException('ProfileRepository is required');
+    if (!(profileRepository instanceof ProfileRepository)) {
+      throw new ProfileManagementException('Repository must be an instance of ProfileRepository');
+    }
+    this.#profileRepository = profileRepository;
   }
 
   /**
@@ -16,25 +26,29 @@ class DefaultProfileService {
    * @returns {Promise<Profile>} The profile with the given ID.
    */
   async getBasicProfile(id) {
-    return ProfileDTOFactory.createBasicInfoProfile(this.profileRepository.getProfileById(id));
+    if (!id) throw new ProfileManagementException('Profile id is required');
+    return ProfileDTOFactory.createBasicInfoProfile(this.#profileRepository.getProfileById(id));
   }
 
   /**
    * Save a profile.
    * @param {Profile} profile - The profile to save.
-   * @returns {Promise<void>}
+   * @returns {Promise<Object>}
    */
   async saveProfile(profile) {
-    return this.profileRepository.saveProfile(profile);
+    if (!profile) throw new ProfileManagementException('Profile is required');
+    if (!(profile instanceof Profile)) throw new ProfileManagementException('Profile must be an instance of Profile');
+    return this.#profileRepository.saveProfile(profile);
   }
 
   /**
    * Delete a profile by its ID.
    * @param {string} id - The ID of the profile to delete.
-   * @returns {Promise<void>}
+   * @returns {Promise<Boolean>}
    */
   async deleteProfile(id) {
-    return this.profileRepository.deleteProfile(id);
+    if (!id) throw new ProfileManagementException('Profile id is required');
+    return this.#profileRepository.deleteProfile(id);
   }
 
   /**
@@ -42,7 +56,7 @@ class DefaultProfileService {
    * @returns {Promise<Profile[]>} All profiles.
    */
   async getAllProfiles() {
-    const profiles = this.profileRepository.getAllProfiles();
+    const profiles = this.#profileRepository.getAllProfiles();
     return profiles.map((profile) => ProfileDTOFactory.createBasicInfoProfile(profile));
   }
 }

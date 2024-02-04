@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable import/no-extraneous-dependencies */
 /**
  * BaseDomain class that serves as a base for other domain classes.
@@ -32,10 +33,12 @@ export default class BaseDomain {
    * @param {number|string} id - The new id of the domain.
    */
   set id(id) {
-    if (id === null || id === undefined || id === NIL_UUID) throw new ProfileManagementException('Id cannot be null or undefined.');
-
-    if (typeof id !== 'number' && typeof id !== 'string') throw new Error('Id must be a number or a string.');
-
+    if (id === null || id === undefined || id === NIL_UUID) {
+      throw new ProfileManagementException('Id cannot be null or undefined.');
+    }
+    if (typeof id !== 'number' && typeof id !== 'string') {
+      throw new ProfileManagementException('Id must be a number or a string.');
+    }
     this.#id = id;
   }
 
@@ -61,6 +64,6 @@ export default class BaseDomain {
    * @return {boolean} True if the domains are equal, false otherwise.
    */
   equals(other) {
-    return this.#id === other.id;
+    return this instanceof BaseDomain === other instanceof BaseDomain && this.#id === other.id;
   }
 }

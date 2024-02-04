@@ -3,6 +3,8 @@
  * ProfileFactory
  */
 
+import ProfileManagementException from '../ProfileManagementException';
+import Profile from './Profile';
 import { BasicInfoProfile, ComprehensiveProfile } from './dtos';
 
 class ProfileDTOFactory {
@@ -12,7 +14,23 @@ class ProfileDTOFactory {
    * @returns {BasicInfoProfile} A BasicInfoProfile instance.
    */
   static createBasicInfoProfile(profile) {
-    return new BasicInfoProfile(...profile);
+    if (!(profile instanceof Profile)) {
+      throw new ProfileManagementException(
+        'profile must be an instance of Profile',
+      );
+    }
+    return new BasicInfoProfile(
+      profile.id,
+      profile.firstName,
+      profile.lastName,
+      profile.email,
+      profile.otherNames,
+      profile.profilePicture,
+      profile.biography,
+      profile.contactInformation,
+      profile.preferences,
+      profile.profileSettings,
+    );
   }
 
   /**
@@ -21,7 +39,26 @@ class ProfileDTOFactory {
    * @returns {ComprehensiveProfile} A ComprehensiveProfile instance.
    */
   static createComprehensiveProfile(profile) {
-    return new ComprehensiveProfile(...profile);
+    if (!(profile instanceof Profile)) {
+      throw new ProfileManagementException(
+        'profile must be an instance of Profile',
+      );
+    }
+    return new ComprehensiveProfile(
+      profile.id,
+      profile.firstName,
+      profile.lastName,
+      profile.email,
+      profile.otherNames,
+      profile.profilePicture,
+      profile.biography,
+      profile.contactInformation,
+      profile.preferences,
+      profile.activityLog,
+      profile.workExperiences,
+      profile.educations,
+      profile.profileSettings,
+    );
   }
 }
 

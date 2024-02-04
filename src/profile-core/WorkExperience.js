@@ -1,6 +1,6 @@
 /* eslint-disable linebreak-style */
 import { BaseDomain } from '../seedwork';
-
+import ProfileManagementException from '../ProfileManagementException';
 /**
  * WorkExperience class that represents a user's work experience.
  */
@@ -11,7 +11,7 @@ class WorkExperience extends BaseDomain {
 
   #companyName;
 
-  #position;
+  #jobRole;
 
   #startDate;
 
@@ -23,7 +23,7 @@ class WorkExperience extends BaseDomain {
    * Constructs a new WorkExperience instance.
    * @param {string} profileId - The profile ID.
    * @param {string} companyName - The name of the company.
-   * @param {string} position - The position held at the company.
+   * @param {string} jobRole - The jobRole held at the company.
    * @param {Date} startDate - The start date of the work experience.
    * @param {Date} endDate - The end date of the work experience.
    * @param {string} workExperienceId - The unique identifier for the work experience (optional).
@@ -32,7 +32,7 @@ class WorkExperience extends BaseDomain {
   constructor(
     profileId,
     companyName,
-    position,
+    jobRole,
     startDate,
     endDate,
     workExperienceId = null,
@@ -42,7 +42,7 @@ class WorkExperience extends BaseDomain {
     this.#profileId = profileId;
     this.#workExperienceId = workExperienceId;
     this.#companyName = companyName;
-    this.#position = position;
+    this.#jobRole = jobRole;
     this.#startDate = startDate;
     this.#endDate = endDate;
     this.#roleDescription = roleDescription;
@@ -60,6 +60,9 @@ class WorkExperience extends BaseDomain {
    * Sets the profile ID.
    */
   set profileId(profileId) {
+    if (profileId === null || profileId === undefined || profileId === '') {
+      throw new ProfileManagementException('Invalid argument: Profile ID cannot be null or empty.');
+    }
     this.#profileId = profileId;
   }
 
@@ -96,19 +99,22 @@ class WorkExperience extends BaseDomain {
   }
 
   /**
-   * Gets the position.
-   * @return {string} The position.
+   * Gets the jobRole.
+   * @return {string} The jobRole.
    */
-  get position() {
-    return this.#position;
+  get jobRole() {
+    return this.#jobRole;
   }
 
   /**
-   * Sets the position.
-   * @param {string} position - The position.
+   * Sets the jobRole.
+   * @param {string} jobRole - The jobRole.
    */
-  set position(position) {
-    this.#position = position;
+  set jobRole(jobRole) {
+    if (jobRole === null || jobRole === undefined) {
+      throw new ProfileManagementException('Invalid argument: Job role cannot be null or undefined.');
+    }
+    this.#jobRole = jobRole;
   }
 
   /**
@@ -124,6 +130,11 @@ class WorkExperience extends BaseDomain {
    * @param {Date} startDate - The start date.
    */
   set startDate(startDate) {
+    if (startDate === null || startDate === undefined) {
+      throw new ProfileManagementException(
+        'Invalid argument: Start date cannot be null or undefined.',
+      );
+    }
     this.#startDate = startDate;
   }
 
@@ -140,6 +151,9 @@ class WorkExperience extends BaseDomain {
    * @param {Date} endDate - The end date.
    */
   set endDate(endDate) {
+    if (endDate === null || endDate === undefined) {
+      throw new ProfileManagementException('Invalid argument: End date cannot be null or undefined.');
+    }
     this.#endDate = endDate;
   }
 
@@ -156,6 +170,9 @@ class WorkExperience extends BaseDomain {
    * @param {string} roleDescription - The role description.
    */
   set roleDescription(roleDescription) {
+    if (roleDescription === null || roleDescription === undefined) {
+      throw new ProfileManagementException('Invalid argument: Role description cannot be null or undefined.');
+    }
     this.#roleDescription = roleDescription;
   }
 }

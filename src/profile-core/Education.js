@@ -2,6 +2,7 @@
 /**
  * Represents an Education object.
  */
+import ProfileManagementException from '../ProfileManagementException';
 import { BaseDomain } from '../seedwork';
 
 class Education extends BaseDomain {
@@ -61,6 +62,9 @@ class Education extends BaseDomain {
    * Sets the profile ID.
    */
   set profileId(profileId) {
+    if (profileId === null || profileId === undefined || profileId === '') {
+      throw new ProfileManagementException('Invalid argument: Profile ID cannot be null or empty.');
+    }
     this.#profileId = profileId;
   }
 
@@ -77,6 +81,17 @@ class Education extends BaseDomain {
    * @param {string} institution - The institution.
    */
   set institution(institution) {
+    if (institution === undefined || typeof institution !== 'string') {
+      throw new ProfileManagementException(
+        'Invalid argument: Institution cannot be null or empty.',
+      );
+    }
+
+    if (institution !== undefined && institution.length === 0) {
+      throw new ProfileManagementException(
+        'Invalid argument: Institution cannot be null or empty.',
+      );
+    }
     this.#institution = institution;
   }
 
@@ -93,6 +108,17 @@ class Education extends BaseDomain {
    * @param {string} awardTitle - The award title.
    */
   set awardTitle(awardTitle) {
+    if (awardTitle === undefined || typeof awardTitle !== 'string') {
+      throw new ProfileManagementException(
+        'Invalid argument: Award title cannot be null or empty.',
+      );
+    }
+
+    if (awardTitle !== undefined && awardTitle.length === 0) {
+      throw new ProfileManagementException(
+        'Invalid argument: Award title cannot be null or empty.',
+      );
+    }
     this.#awardTitle = awardTitle;
   }
 
@@ -109,6 +135,16 @@ class Education extends BaseDomain {
    * @param {string} awardType - The award type.
    */
   set awardType(awardType) {
+    if (awardType === undefined || typeof awardType !== 'string') {
+      throw new ProfileManagementException(
+        'Invalid argument: Award type cannot be null or empty.',
+      );
+    }
+    if (awardType !== undefined && awardType.length === 0) {
+      throw new ProfileManagementException(
+        'Invalid argument: Award type cannot be null or empty.',
+      );
+    }
     this.#awardType = awardType;
   }
 
@@ -125,6 +161,20 @@ class Education extends BaseDomain {
    * @param {number} year - The year.
    */
   set year(year) {
+    if (
+      year === undefined
+      || typeof year !== 'number'
+      || typeof year === 'string'
+    ) {
+      throw new ProfileManagementException(
+        'Invalid argument: Year cannot be null or empty.',
+      );
+    }
+    // if (year !== undefined && year.length === 0) {
+    //   throw new ProfileManagementException(
+    //     'Invalid argument: Year cannot be null or empty.',
+    //   );
+    // }
     this.#year = year;
   }
 

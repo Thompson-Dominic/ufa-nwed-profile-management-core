@@ -1,5 +1,6 @@
 /* eslint-disable linebreak-style */
 /* Profile Settings for the Profile Management System. */
+import ProfileManagementException from '../ProfileManagementException';
 import { BaseDomain } from '../seedwork';
 
 class ProfileSetting extends BaseDomain {
@@ -38,6 +39,9 @@ class ProfileSetting extends BaseDomain {
    * @param {string} profileId - The profile ID.
    */
   set profileId(profileId) {
+    if (profileId === null || profileId === undefined || profileId === '') {
+      throw new ProfileManagementException('Invalid argument: Profile ID cannot be null or empty.');
+    }
     this.#profileId = profileId;
   }
 

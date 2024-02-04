@@ -2,6 +2,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable class-methods-use-this */
 
+import ProfileManagementException from '../ProfileManagementException';
+
 class ProfileRepository {
   /**
    * Get a profile by its ID.
@@ -9,7 +11,7 @@ class ProfileRepository {
    * @returns {Promise<Profile>} The profile with the given ID.
    */
   getProfileById(id) {
-    throw new Error('Not implemented');
+    throw new ProfileManagementException('Repository Not implemented');
   }
 
   /**
@@ -18,7 +20,7 @@ class ProfileRepository {
    * @returns {Promise<void>}
    */
   saveProfile(profile) {
-    throw new Error('Not implemented');
+    throw new ProfileManagementException('Repository Not implemented');
   }
 
   /**
@@ -27,7 +29,7 @@ class ProfileRepository {
    * @returns {Promise<void>}
    */
   deleteProfile(id) {
-    throw new Error('Not implemented');
+    throw new ProfileManagementException('Repository Not implemented');
   }
 
   /**
@@ -35,7 +37,7 @@ class ProfileRepository {
    * @returns {Promise<Profile[]>} All profiles.
    */
   getAllProfiles() {
-    throw new Error('Not implemented');
+    throw new ProfileManagementException('Repository Not implemented');
   }
 }
 

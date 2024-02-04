@@ -1,5 +1,7 @@
 /* eslint-disable linebreak-style */
 class ComprehensiveProfile {
+  #profileId;
+
   #firstName;
 
   #lastName;
@@ -28,17 +30,18 @@ class ComprehensiveProfile {
    * @param {string} firstName - The first name of the profile.
    * @param {string} lastName - The last name of the profile.
    * @param {string} email - The email address of the profile.
-   * @param {string[]} otherNames - Any other names the profile might go by.
+   * @param {string} otherNames - Any other names the profile might go by.
    * @param {string} profilePicture - URL of the profile picture.
    * @param {string} biography - A short biography of the profile.
    * @param {Object} contactInformation - An object containing contact information fields.
    * @param {Object} preferences - An object containing preference fields.
    * @param {Object[]} activityLog - An array of activity log entries.
-   * @param {Object[]} workExperiences - An array of work experience entries.
-   * @param {Object[]} educations - An array of education entries.
+   * @param {Object} workExperiences - An array of work experience entries.
+   * @param {Object} educations - An array of education entries.
    * @param {Object} profileSettings - An object containing profile setting fields.
    */
   constructor(
+    profileId,
     firstName,
     lastName,
     email,
@@ -52,6 +55,7 @@ class ComprehensiveProfile {
     educations,
     profileSettings,
   ) {
+    this.#profileId = profileId;
     this.#firstName = firstName;
     this.#lastName = lastName;
     this.#email = email;
@@ -64,6 +68,11 @@ class ComprehensiveProfile {
     this.#workExperiences = workExperiences;
     this.#educations = educations;
     this.#profileSettings = profileSettings;
+  }
+
+  /** @returns {string} The ID of the profile. */
+  get profileId() {
+    return this.#profileId;
   }
 
   /** @returns {string} The first name of the profile. */
@@ -81,7 +90,7 @@ class ComprehensiveProfile {
     return this.#email;
   }
 
-  /** @returns {string[]} Any other names the profile might go by. */
+  /** @returns {string} Any other names the profile might go by. */
   get otherNames() {
     return this.#otherNames;
   }
@@ -111,12 +120,12 @@ class ComprehensiveProfile {
     return this.#activityLog;
   }
 
-  /** @returns {Object[]} An array of work experience entries. */
+  /** @returns {Object} An array of work experience entries. */
   get workExperiences() {
     return this.#workExperiences;
   }
 
-  /** @returns {Object[]} An array of education entries. */
+  /** @returns {Object} An array of education entries. */
   get educations() {
     return this.#educations;
   }

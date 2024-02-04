@@ -1,5 +1,7 @@
 /* eslint-disable linebreak-style */
 class BasicInfoProfile {
+  #profileId;
+
   #firstName;
 
   #lastName;
@@ -19,10 +21,11 @@ class BasicInfoProfile {
   #profileSettings;
 
   /**
+   * @param {string} profileId - The ID of the profile.
    * @param {string} firstName - The first name of the profile.
    * @param {string} lastName - The last name of the profile.
    * @param {string} email - The email address of the profile.
-   * @param {string[]} otherNames - Any other names the profile might go by.
+   * @param {string} otherNames - Any other names the profile might go by.
    * @param {string} profilePicture - URL of the profile picture.
    * @param {string} biography - A short biography of the profile.
    * @param {Object} contactInformation - An object containing contact information fields.
@@ -30,6 +33,7 @@ class BasicInfoProfile {
    * @param {Object} profileSettings - An object containing profile setting fields.
    */
   constructor(
+    profileId,
     firstName,
     lastName,
     email,
@@ -40,6 +44,7 @@ class BasicInfoProfile {
     preferences,
     profileSettings,
   ) {
+    this.#profileId = profileId;
     this.#firstName = firstName;
     this.#lastName = lastName;
     this.#email = email;
@@ -49,6 +54,11 @@ class BasicInfoProfile {
     this.#contactInformation = contactInformation;
     this.#preferences = preferences;
     this.#profileSettings = profileSettings;
+  }
+
+  /** @returns {string} The ID of the profile. */
+  get profileId() {
+    return this.#profileId;
   }
 
   /** @returns {string} The first name of the profile. */
@@ -66,7 +76,7 @@ class BasicInfoProfile {
     return this.#email;
   }
 
-  /** @returns {string[]} Any other names the profile might go by. */
+  /** @returns {string} Any other names the profile might go by. */
   get otherNames() {
     return this.#otherNames;
   }

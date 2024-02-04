@@ -43,6 +43,21 @@ class Profile extends BaseDomain {
    * @param {string} otherNames - The otherNames of the user.
    */
   constructor(firstName, lastName, email, otherNames, profileId = null) {
+    if (typeof firstName !== 'string' || !firstName) {
+      throw new ProfileManagementException('Invalid Argument: firstName must be a non-empty string.');
+    }
+
+    if (typeof lastName !== 'string' || !lastName) {
+      throw new ProfileManagementException('Invalid Argument: lastName must be a non-empty string.');
+    }
+
+    if (!email || typeof email !== 'string' || !email.includes('@')) {
+      throw new ProfileManagementException('Invalid Argument: email must be a valid email string.');
+    }
+
+    if (typeof otherNames !== 'string' || !otherNames) {
+      throw new ProfileManagementException('Invalid Argument: otherNames must be a non-empty string.');
+    }
     super(profileId);
     this.#firstName = firstName;
     this.#lastName = lastName;
@@ -60,14 +75,6 @@ class Profile extends BaseDomain {
     if (this.isTransient()) {
       super.generateId();
     }
-  }
-
-  /**
-   * Gets the profile id.
-   */
-
-  generateProfileId() {
-    super.generateId();
   }
 
   // Getter for firstName
@@ -96,14 +103,6 @@ class Profile extends BaseDomain {
    */
   get name() {
     return `${this.#firstName} ${this.#lastName}`;
-  }
-
-  /**
-   * Sets the first name and last name.
-   * @param {string} name - The full name.
-   */
-  set name(name) {
-    [this.#firstName, this.#lastName] = name.split(' ');
   }
 
   /**
@@ -255,7 +254,7 @@ class Profile extends BaseDomain {
       || !(workExperience instanceof WorkExperience)
     ) {
       throw new ProfileManagementException(
-        'Invalid argument: Work experience must be an instance of WorkExperience.',
+        'Invalid Argument: Work experience must be an instance of WorkExperience.',
       );
     }
     if (workExperience.profileId !== this.id) {
@@ -279,7 +278,7 @@ class Profile extends BaseDomain {
       || !(education instanceof Education)
     ) {
       throw new ProfileManagementException(
-        'Invalid argument: Education must be an instance of Education.',
+        'Invalid Argument: Education must be an instance of Education.',
       );
     }
     if (education.profileId !== this.id) {
@@ -303,7 +302,7 @@ class Profile extends BaseDomain {
       || !(profileSetting instanceof ProfileSetting)
     ) {
       throw new ProfileManagementException(
-        'Invalid argument: Profile setting must be an instance of ProfileSetting.',
+        'Invalid Argument: Profile setting must be an instance of ProfileSetting.',
       );
     }
     if (profileSetting.profileId !== this.id) {
