@@ -1,20 +1,13 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable no-undef */
+/* eslint-disable import/no-extraneous-dependencies */
 
 import { jest } from '@jest/globals';
 import {
-  Profile,
   ProfileRepository,
   DefaultProfileService,
 } from '../src/profile-core';
 import ProfileManagementException from '../src/ProfileManagementException';
-
-// jest.unstable_mockModule('../src/profile-core/ProfileRepository', () => ({
-//   getProfileById: jest.fn(),
-//   saveProfile: jest.fn(),
-//   deleteProfile: jest.fn(),
-//   getAllProfiles: jest.fn(),
-// }));
 
 jest.mock('../src/profile-core/ProfileRepository', () => jest.fn().mockImplementation(() => ({
   getProfileById: jest.fn(),
@@ -23,17 +16,8 @@ jest.mock('../src/profile-core/ProfileRepository', () => jest.fn().mockImplement
   getAllProfiles: jest.fn(),
 })));
 
-// const { ProfileRepository } = await import('../src/profile-core/ProfileRepository');
-
 describe('DefaultProfileService', () => {
-  //   let profileRepository;
-  //   let defaultProfileService;
   const mockProfileRepository = new ProfileRepository();
-
-  beforeEach(() => {
-    // ProfileRepository.clearAllMocks();
-    // defaultProfileService = new DefaultProfileService(ProfileRepository);
-  });
 
   /**
    * Test that the constructor throws an error when no profileRepository is provided.
